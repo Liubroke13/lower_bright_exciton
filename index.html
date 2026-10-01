@@ -44,6 +44,7 @@
       align-items: center;
       min-width: min-content;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .rotate-notice {
@@ -57,7 +58,7 @@
       text-align: center;
       font-size: 0.95rem;
       width: 100%;
-      max-width: 1280px;
+      max-width: 1300px;
       box-sizing: border-box;
     }
 
@@ -69,11 +70,94 @@
 
     .page-container {
       width: 100%;
-      min-width: 1000px;
+      max-width: 1300px;
+      min-width: 1100px;
       display: flex;
       flex-direction: column;
       align-items: center;
       box-sizing: border-box;
+    }
+
+    /* Control Bar Styles */
+    .controls-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background-color: #f2f2f2;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 8px 16px;
+      margin-top: 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .play-btn {
+      background-color: #0056b3;
+      color: #ffffff;
+      border: none;
+      padding: 6px 16px;
+      font-size: 1rem;
+      font-family: inherit;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 110px;
+      transition: background-color 0.2s, opacity 0.2s;
+    }
+
+    .play-btn:hover:not(:disabled) {
+      filter: brightness(0.9);
+    }
+
+    .play-btn:disabled {
+      background-color: #6c757d;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .seek-slider {
+      flex-grow: 1;
+      height: 6px;
+      cursor: pointer;
+      accent-color: #0056b3;
+    }
+
+    .seek-slider:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .time-display {
+      font-size: 1rem;
+      font-family: 'Times New Roman', Times, serif;
+      color: #333;
+      min-width: 130px;
+      text-align: right;
+    }
+
+    .loading-notice {
+      margin-top: 8px;
+      padding: 6px 12px;
+      font-size: 0.95rem;
+      font-family: sans-serif;
+      color: #856404;
+      background-color: #fff3cd;
+      border: 1px solid #ffeeba;
+      border-radius: 4px;
+      text-align: center;
+      transition: opacity 0.5s ease;
+      width: 100%;
+      box-sizing: border-box;
+      display: none;
+    }
+
+    .loading-notice.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
 
     .combined-grid {
@@ -134,7 +218,13 @@
       object-fit: cover;
       display: block;
       pointer-events: none;
+      -webkit-transform: translateZ(0);
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
     }
+
+    video::-webkit-media-controls { display: none !important; }
+    video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none !important; }
 
     /* Dipole 圖片區域：放大 1.1 倍 (scale 1.1) */
     .dipole-cell {
@@ -165,7 +255,7 @@
       z-index: 10;
     }
 
-    /* 🎯 預設左側比例尺標籤 */
+    /* 預設左側比例尺標籤 */
     .scale-overlay {
       position: absolute;
       bottom: 4px;
@@ -176,7 +266,7 @@
       z-index: 10;
     }
 
-    /* 🎯 單獨將 Q_c 標籤位置向上抬高 */
+    /* 單獨將 Q_c 標籤位置向上抬高 */
     .scale-overlay.lift-up {
       bottom: 45px;
     }
@@ -276,11 +366,11 @@
       $\ell = -1$
     </div>
     <div class="video-cell" style="grid-column: 3; grid-row: 4;">
-      <video src="l_-1_lp_1.mp4" autoplay muted loop playsinline></video>
+      <video src="l_-1_lp_1.mp4#t=0.001" muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture controlsList="nodownload no-fullscreen noremoteplayback"></video>
       <div class="j-overlay">$\bar{\ell} = 0$</div>
     </div>
     <div class="video-cell" style="grid-column: 4; grid-row: 4;">
-      <video src="l_-1_lp_2.mp4" autoplay muted loop playsinline></video>
+      <video src="l_-1_lp_2.mp4#t=0.001" muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture controlsList="nodownload no-fullscreen noremoteplayback"></video>
       <div class="j-overlay">$1/2$</div>
     </div>
 
@@ -290,13 +380,14 @@
     </div>
 
     <div class="video-cell" style="grid-column: 6; grid-row: 4;">
-      <video src="BM_l1_-1_l2_1.mp4" autoplay muted loop playsinline></video>
-      <!-- 🎯 抬高的 0.1Q_c 文字 -->
+      <video src="BM_l1_-1_l2_1.mp4#t=0.001" muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture controlsList="nodownload no-fullscreen noremoteplayback"></video>
+
+      <!-- 抬高的 0.1Q_c 文字 -->
       <div class="scale-overlay lift-up">$0.1Q_c$</div>
       <div class="j-overlay">$\bar{\ell} = 0$</div>
     </div>
     <div class="video-cell" style="grid-column: 7; grid-row: 4;">
-      <video src="BM_l1_-1_l2_2.mp4" autoplay muted loop playsinline></video>
+      <video src="BM_l1_-1_l2_2.mp4#t=0.001" muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture controlsList="nodownload no-fullscreen noremoteplayback"></video>
       <div class="j-overlay">$1/2$</div>
     </div>
     <div class="grid-cell orange-cell" style="grid-column: 8; grid-row: 4;">
@@ -308,20 +399,20 @@
       $\ell = 0$
     </div>
     <div class="video-cell" style="grid-column: 3; grid-row: 5;">
-      <video src="l_0_lp_1.mp4" autoplay muted loop playsinline></video>
+      <video src="l_0_lp_1.mp4#t=0.001" muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture controlsList="nodownload no-fullscreen noremoteplayback"></video>
       <div class="j-overlay">$1/2$</div>
     </div>
     <div class="video-cell" style="grid-column: 4; grid-row: 5;">
-      <video src="l_0_lp_2.mp4" autoplay muted loop playsinline></video>
+      <video src="l_0_lp_2.mp4#t=0.001" muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture controlsList="nodownload no-fullscreen noremoteplayback"></video>
       <div class="j-overlay">$1$</div>
     </div>
 
     <div class="video-cell" style="grid-column: 6; grid-row: 5;">
-      <video src="BM_l1_0_l2_1.mp4" autoplay muted loop playsinline></video>
+      <video src="BM_l1_0_l2_1.mp4#t=0.001" muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture controlsList="nodownload no-fullscreen noremoteplayback"></video>
       <div class="j-overlay">$1/2$</div>
     </div>
     <div class="video-cell" style="grid-column: 7; grid-row: 5;">
-      <video src="BM_l1_0_l2_2.mp4" autoplay muted loop playsinline></video>
+      <video src="BM_l1_0_l2_2.mp4#t=0.001" muted loop playsinline webkit-playsinline preload="auto" disablePictureInPicture controlsList="nodownload no-fullscreen noremoteplayback"></video>
       <div class="j-overlay">$1$</div>
     </div>
     <div class="grid-cell orange-cell" style="grid-column: 8; grid-row: 5;">
@@ -344,18 +435,193 @@
     In the above figures : $\alpha = 0, \beta = \frac{\pi}{2}, \Delta\sigma = -2$ (figures are plotted <strong>without</strong> the approximation)
   </div>
 
+  <!-- Synchronized Playback Control Bar -->
+  <div class="controls-wrapper">
+    <button id="playBtn" class="play-btn">Load Videos</button>
+    <input type="range" id="seekSlider" class="seek-slider" min="0" max="6.2831853" value="0" step="0.314159" disabled>
+    <div id="timeDisplay" class="time-display"><span class="math">\omega t</span> = 0.0\pi</div>
+  </div>
+
+  <!-- Loading Status Notice Below Control Bar -->
+  <div id="loadingNotice" class="loading-notice">
+    ⏳ Fully buffering video data into device memory... (<span id="loadedCount">0</span>/8)
+  </div>
+
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const videos = document.querySelectorAll('video');
-    videos.forEach(v => {
-      v.play().catch(() => {});
-    });
-
+  document.addEventListener('DOMContentLoaded', () => {
+    // 手動觸發一次 MathJax 重新排版
     if (window.MathJax && window.MathJax.typesetPromise) {
       window.MathJax.typesetPromise().catch((err) => console.log('MathJax typeset failed: ' + err.message));
     }
+
+    const videos = Array.from(document.querySelectorAll('video'));
+    const playBtn = document.getElementById('playBtn');
+    const seekSlider = document.getElementById('seekSlider');
+    const timeDisplay = document.getElementById('timeDisplay');
+    const loadingNotice = document.getElementById('loadingNotice');
+    const loadedCountSpan = document.getElementById('loadedCount');
+    
+    let isSeeking = false;
+    let masterVideo = videos[0];
+    const TWO_PI = Math.PI * 2;
+    let isFullyLoaded = false;
+    const loadedSet = new Set();
+
+    videos.forEach(v => {
+      v.muted = true;
+      v.defaultMuted = true;
+      v.pause();
+    });
+
+    function timeToWt(currentTime, duration) {
+      if (!duration) return 0;
+      const progress = (currentTime % duration) / duration;
+      return progress * TWO_PI;
+    }
+
+    function wtToTime(wt, duration) {
+      if (!duration) return 0;
+      return (wt / TWO_PI) * duration;
+    }
+
+    function updateWtDisplay(wt) {
+      const piFraction = (wt / Math.PI).toFixed(1);
+      timeDisplay.innerHTML = `<span class="math">\\omega t</span> = ${piFraction}\\pi`;
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([timeDisplay]).catch(() => {});
+      }
+    }
+
+    masterVideo.addEventListener('timeupdate', () => {
+      if (!isSeeking && masterVideo.duration && isFullyLoaded) {
+        const wt = timeToWt(masterVideo.currentTime, masterVideo.duration);
+        seekSlider.value = wt;
+        updateWtDisplay(wt);
+      }
+    });
+
+    function markVideoLoaded(index) {
+      if (!loadedSet.has(index)) {
+        loadedSet.add(index);
+        loadedCountSpan.textContent = loadedSet.size;
+
+        if (loadedSet.size >= videos.length) {
+          onAllVideosReady();
+        }
+      }
+    }
+
+    function onAllVideosReady() {
+      if (isFullyLoaded) return;
+      isFullyLoaded = true;
+      
+      videos.forEach(v => {
+        v.pause();
+        v.playbackRate = 1.0;
+        v.currentTime = 0.001;
+      });
+
+      playBtn.textContent = 'Play';
+      playBtn.style.backgroundColor = '#28a745';
+      playBtn.disabled = false;
+      seekSlider.disabled = false;
+
+      loadingNotice.style.opacity = '0';
+      setTimeout(() => {
+        loadingNotice.classList.add('hidden');
+      }, 500);
+    }
+
+    function warmUpVideo(v, idx) {
+      return new Promise((resolve) => {
+        let isDone = false;
+
+        const checkBufferAndComplete = () => {
+          if (isDone) return;
+
+          const isTimeNearEnd = v.duration && (v.currentTime >= v.duration - 0.2);
+
+          let isBufferedFull = false;
+          if (v.buffered && v.buffered.length > 0 && v.duration) {
+            const bufferedEnd = v.buffered.end(v.buffered.length - 1);
+            if (bufferedEnd >= v.duration - 0.1) {
+              isBufferedFull = true;
+            }
+          }
+
+          if (isTimeNearEnd || isBufferedFull) {
+            isDone = true;
+            v.removeEventListener('timeupdate', checkBufferAndComplete);
+            v.pause();
+            markVideoLoaded(idx);
+            resolve();
+          }
+        };
+
+        v.addEventListener('timeupdate', checkBufferAndComplete);
+        v.playbackRate = 4.0;
+        
+        const promise = v.play();
+        if (promise !== undefined) {
+          promise.catch(() => {
+            v.play();
+          });
+        }
+      });
+    }
+
+    playBtn.addEventListener('click', async () => {
+      if (!isFullyLoaded) {
+        playBtn.disabled = true;
+        playBtn.textContent = 'Buffering...';
+        playBtn.style.backgroundColor = '#6c757d';
+        loadingNotice.style.display = 'block';
+
+        const warmUpTasks = videos.map((v, idx) => warmUpVideo(v, idx));
+        await Promise.all(warmUpTasks);
+        onAllVideosReady();
+        return;
+      }
+
+      if (masterVideo.paused) {
+        try {
+          const targetTime = parseFloat(seekSlider.value) === 0 ? 0.001 : wtToTime(parseFloat(seekSlider.value), masterVideo.duration);
+          
+          videos.forEach(v => {
+            v.currentTime = targetTime;
+          });
+
+          const playPromises = videos.map(v => v.play());
+          await Promise.all(playPromises);
+
+          playBtn.textContent = 'Pause';
+          playBtn.style.backgroundColor = '#dc3545';
+        } catch (err) {
+          console.error("Playback start error: ", err);
+        }
+      } else {
+        videos.forEach(v => v.pause());
+        playBtn.textContent = 'Play';
+        playBtn.style.backgroundColor = '#28a745';
+      }
+    });
+
+    seekSlider.addEventListener('input', () => {
+      if (!isFullyLoaded) return;
+      isSeeking = true;
+      const wt = parseFloat(seekSlider.value);
+      const seekTime = wtToTime(wt, masterVideo.duration);
+      videos.forEach(v => {
+        v.currentTime = seekTime;
+      });
+      updateWtDisplay(wt);
+    });
+
+    seekSlider.addEventListener('change', () => {
+      isSeeking = false;
+    });
   });
 </script>
 
